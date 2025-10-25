@@ -58,3 +58,40 @@ SmtpTelegramGateway is an SMTP gateway that forwards received emails to specifie
         ```
 
 4. Send a test email and get it in Telegram. Use `localhost` as an SMTP server address, `25` as a port and no authentifiacation or, if necessary, select the basic authentication method with a fake username and password.
+
+# Other configure options
+
+You can configure program via command line parameters:
+   ```ps
+   SmtpTelegramGateway.exe --SmtpPort 25 --TelegramBotToken 111:ABC --Routing:0:Email * --Routing:0:TelegramChat 222 --Logging:LogLevel:Default Debug
+   ```
+or via environment variables:
+   ```
+   SmtpPort=25
+   TelegramBotToken=111__ABC
+   Routing__0__Email=*
+   Routing__0__TelegramChat=222
+   Logging__LogLevel__Default=Debug
+   ```
+or via file `appsettings.json`:
+   ```json
+   {
+     "SmtpPort": 25,
+     "TelegramBotToken": "SPECIFY THERE TELEGRAM BOT TOKEN",
+     "Routing": [
+       {
+         "Email": "*",
+         "TelegramChat": "SPECIFY THERE TELEGRAM USERID, GROUPID, CHANNELID OR @USERNAME"
+       },
+       {
+         "Email": "example@test.com",
+         "TelegramChat": "SPECIFY THERE TELEGRAM USERID, GROUPID, CHANNELID OR @USERNAME"
+       }
+     ],
+     "Logging": {
+       "LogLevel": {
+         "Default": "Debug"
+       }
+     }
+   }
+   ```
