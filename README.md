@@ -61,11 +61,11 @@ SmtpTelegramGateway is an SMTP gateway that forwards received emails to specifie
 
 # Other configure options
 
-You can configure program via command line parameters:
+Apart from configuration via "appsettings.yaml," the program can also be configured using command line parameters:
    ```ps
    SmtpTelegramGateway.exe --SmtpPort 25 --TelegramBotToken 111:ABC --Routing:0:Email * --Routing:0:TelegramChat 222 --Logging:LogLevel:Default Debug
    ```
-or via environment variables:
+or using environment variables:
    ```
    SmtpPort=25
    TelegramBotToken=111__ABC
@@ -73,7 +73,7 @@ or via environment variables:
    Routing__0__TelegramChat=222
    Logging__LogLevel__Default=Debug
    ```
-or via file `appsettings.json`:
+or using file `appsettings.json`:
    ```json
    {
      "SmtpPort": 25,
