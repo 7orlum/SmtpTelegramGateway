@@ -11,15 +11,19 @@ internal sealed class Program
     {
         var builder = Host.CreateApplicationBuilder(args);
 
-        _ = builder.Configuration
+        builder.Configuration
             .SetBasePath(AppContext.BaseDirectory)
             .AddYamlFile("appsettings.yaml", optional: true, reloadOnChange: true)
             .AddYamlFile($"appsettings.{builder.Environment.EnvironmentName}.yaml", optional: true, reloadOnChange: true);
 
-        _ = builder.Services
+        builder.Services
+            .AddOptionsWithValidateOnStart<Configuration>()
+            .Bind(builder.Configuration)
+            .ValidateDataAnnotations();
+
+        builder.Services
             .AddHostedService<Smtp>()
             .AddSingleton<MessageStore, Telegram>()
-            .Configure<Configuration>(builder.Configuration)
             .AddSystemd()
             .AddWindowsService(options => options.ServiceName = "SMTP Telegram Gateway");
 
