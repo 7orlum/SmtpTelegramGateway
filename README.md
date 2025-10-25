@@ -95,3 +95,4 @@ or via file `appsettings.json`:
      }
    }
    ```
+You can also combine these methods.
